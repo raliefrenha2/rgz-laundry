@@ -17,4 +17,17 @@ class OutletController extends Controller
 	    }
 	    return new OutletCollection($outlets->paginate(10));
 	}
+
+	public function store(Request $request)
+	{
+	    $this->validate($request, [
+	        'code' => 'required|unique:outlets,code',
+	        'name' => 'required|string|max:100',
+	        'address' => 'required|string',
+	        'phone' => 'required|max:13'
+	    ]);
+
+	    Outlet::create($request->all());
+	    return response()->json(['status' => 'success'], 200);
+	}
 }
