@@ -30,4 +30,24 @@ class OutletController extends Controller
 	    Outlet::create($request->all());
 	    return response()->json(['status' => 'success'], 200);
 	}
+
+	public function edit($id)
+	{
+	    $outlet = Outlet::whereCode($id)->first();
+	    return response()->json(['status' => 'success', 'data' => $outlet], 200);
+	}
+
+	public function update(Request $request, $id)
+	{
+	    $this->validate($request, [
+	        'code' => 'required|exists:outlets,code',
+	        'name' => 'required|string|max:100',
+	        'address' => 'required|string',
+	        'phone' => 'required|max:13'
+	    ]);
+
+	    $outlet = Outlet::whereCode($id)->first();
+	    $outlet->update($request->except('code'));
+	    return response()->json(['status' => 'success'], 200);
+	}
 }
