@@ -11,11 +11,14 @@ class OutletController extends Controller
 {
    public function index()
 	{
-	    $outlets = Outlet::orderBy('created_at', 'DESC');
-	    if (request()->q != '') {
-	        $outlets = $outlets->where('name', 'LIKE', '%' . request()->q . '%');
-	    }
+	    request()->q != '' ? $outlets = $this->searchOutlet(request()->q) : $outlets = Outlet::latest();
+	   
 	    return new OutletCollection($outlets->paginate(10));
+	}
+
+	private function searchOutlet($q)
+	{
+		return Outlet::where('name', 'LIKE', '%' . $q . '%')->latest();
 	}
 
 	public function store(Request $request)
