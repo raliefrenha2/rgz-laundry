@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 //IMPORT MODULE SECTION
 import auth from './stores/auth.js'
 import outlet from './stores/outlet.js'
+import courier from './stores/courier.js'
 
 Vue.use(Vuex)
 
@@ -12,9 +13,10 @@ const store = new Vuex.Store({
     //SEMUA MODULE YANG DIBUAT AKAN DITEPATKAN DIDALAM BAGIAN INI DAN DIPISAHKAN DENGAN KOMA UNTUK SETIAP MODULE-NYA
     modules: {
         auth,
-        outlet
+        outlet,
+        courier
     },
-  	//STATE HAMPIR SERUPA DENGAN PROPERTY DATA DARI COMPONENT HANYA SAJA DAPAT DIGUNAKAN SECARA GLOBAL
+    //STATE HAMPIR SERUPA DENGAN PROPERTY DATA DARI COMPONENT HANYA SAJA DAPAT DIGUNAKAN SECARA GLOBAL
     state: {
         //VARIABLE TOKEN MENGAMBIL VALUE DARI LOCAL STORAGE token
         token: localStorage.getItem('token'),
