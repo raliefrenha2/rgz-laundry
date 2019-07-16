@@ -34,7 +34,30 @@ const actions = {
                     resolve(response.data)
                 })
         })
-    }
+    },
+    submitCourier({ dispatch, commit }, payload) {
+        return new Promise((resolve, reject) => {
+            //MENGIRIMKAN PERMINTAAN KE SERVER DENGAN METHOD POST
+            $axios.post(`/couriers`, payload, {
+                //KARENA TERDAPAT FILE FOTO, MAKA HEADERNYA DITAMBAHKAN multipart/form-data
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then((response) => {
+                    //KETIKA BERHASIL, MAKA DILAKUKAN REQUEST UNTUK MENGAMBIL DATA KURIR TERBARU
+                    dispatch('getCouriers').then(() => {
+                        resolve(response.data)
+                    })
+                })
+                .catch((error) => {
+                    //JIKA GAGALNYA VALIDASI MAKA ERRORNYA AKAN DI ASSIGN
+                    if (error.response.status == 422) {
+                        commit('SET_ERRORS', error.response.data.errors, { root: true })
+                    }
+                })
+        })
+    },
 }
 
 export default {
