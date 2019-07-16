@@ -27,26 +27,26 @@ const router = new Router({
             component: Login
         },
         {
-            path:'/outlets',
-            component:IndexOutlet,
+            path: '/outlets',
+            component: IndexOutlet,
             children: [
                 {
-                    path:'',
-                    name:'outlets.data',
-                    component:DataOutlet,
-                    meta: { title: 'Manage Outlets'}
+                    path: '',
+                    name: 'outlets.data',
+                    component: DataOutlet,
+                    meta: { title: 'Manage Outlets' }
                 },
                 {
-                    path:'add',
-                    name:'outlets.add',
-                    component:AddOutlet,
-                    meta: { title: 'Add New Outlet'}
+                    path: 'add',
+                    name: 'outlets.add',
+                    component: AddOutlet,
+                    meta: { title: 'Add New Outlet' }
                 },
                 {
-                    path:'edit',
-                    name:'outlets.edit',
-                    component:EditOutlet,
-                    meta: { title: 'Edit Outlet'}
+                    path: 'edit',
+                    name: 'outlets.edit',
+                    component: EditOutlet,
+                    meta: { title: 'Edit Outlet' }
                 },
 
             ]
