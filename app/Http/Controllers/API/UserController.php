@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 
+use App\Http\Resources\UserCollection;
+
 class UserController extends Controller
 {
     public function index()
