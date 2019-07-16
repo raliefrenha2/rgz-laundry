@@ -107,4 +107,12 @@ class UserController extends Controller
             return response()->json(['status' => 'error', 'data' => $e->getMessage()], 200);
         }
     }
+
+    public function destroy($id)
+    {
+        $user = User::find($id); //MENGAMBIL DATA YANG AKAN DIHAPUS
+        File::delete(storage_path('app/public/couriers/' . $user->photo)); //MENGHAPUS FILE FOTO
+        $user->delete(); //MENGHAPUS DATANYA
+        return response()->json(['status' => 'success']);
+    }
 }

@@ -81,6 +81,16 @@ const actions = {
                 })
         })
     },
+    removeCourier({ dispatch }, payload) {
+        return new Promise((resolve, reject) => {
+            //MELAKUKAN PERMINTAAN KE SERVER DENGAN METHOD DELETE DAN MENGIRIMKAN ID YANG AKAN DIHAPUS
+            $axios.delete(`/couriers/${payload}`)
+                .then((response) => {
+                    //MENGAMBIL DATA TERBARU DARI SERVER
+                    dispatch('getCouriers').then(() => resolve(response.data))
+                })
+        })
+    }
 }
 
 export default {
