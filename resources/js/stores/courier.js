@@ -58,6 +58,29 @@ const actions = {
                 })
         })
     },
+    editCourier({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            //FUNGSI UNTUK MELAKUKAN REQUEST SINGLE DATA BERDASARKAN ID KURIR
+            $axios.get(`/couriers/${payload}/edit`)
+                .then((response) => {
+                    //DATA YANG DITERIMA AKAN DIKIRIMKAN KE FORM
+                    resolve(response.data)
+                })
+        })
+    },
+    updateCourier({ state }, payload) {
+        return new Promise((resolve, reject) => {
+            //FUNGSI UNTUK MELAKUKAN REQUEST DATA PERUBAHAN DATA KURIR BERDASARKAN STATE ID KURIR
+            $axios.post(`/couriers/${state.id}`, payload, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then((response) => {
+                    resolve(response.data)
+                })
+        })
+    },
 }
 
 export default {
